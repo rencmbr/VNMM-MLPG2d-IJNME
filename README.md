@@ -7,6 +7,7 @@
 Official companion codebase and reproducibility package for the research article:
 
 > **"A Truly Cell-Free Vector Nodal Meshless Method via Meshless Local Petrov–Galerkin (VNMM-MLPG) for 2D Electromagnetics"**  
+> *Authors:* Renato C. Mesquita, Williams L. de Nicomedes, Bárbara M. F. Gonçalves, and Luilly A. G. Ortiz  
 > *Target Journal:* International Journal for Numerical Methods in Engineering (Wiley)
 
 ---
@@ -139,7 +140,7 @@ If you find this codebase or methodology useful in your research, please cite ou
 
 ```bibtex
 @article{mesquita2026vnmm_mlpg,
-  author  = {Mesquita, Renato C. and Ortiz, Willian A. and Gonçalves, Cássio F. and Nicomedes, Wellerson P.},
+  author  = {Mesquita, Renato C. and de Nicomedes, Williams L. and Gon{\c{c}}alves, B{\'a}rbara M. F. and Ortiz, Luilly A. G.},
   title   = {A Truly Cell-Free Vector Nodal Meshless Method via Meshless Local Petrov--Galerkin ({VNMM-MLPG}) for {2D} Electromagnetic Problems},
   journal = {International Journal for Numerical Methods in Engineering},
   year    = {2026},
@@ -152,3 +153,4 @@ If you find this codebase or methodology useful in your research, please cite ou
 ## 📄 License
 
 This project is licensed under the terms of the [MIT License](LICENSE).
+
