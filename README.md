@@ -1,4 +1,4 @@
-# Truly Cell-Free Vector Nodal Meshless Method (VNMM-MLPG 2D) for $H(\mathbf{curl})$ Electromagnetics
+# Truly Cell-Free Vector Nodal Meshless Method (VNMM-MLPG 2D) for Electromagnetic Eigenvalue Problems
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
@@ -6,7 +6,7 @@
 
 Official companion codebase and reproducibility package for the research article:
 
-> **"A Truly Cell-Free Vector Nodal Meshless Method via Meshless Local Petrov–Galerkin (VNMM-MLPG) for 2D Electromagnetics"**  
+> **"A Truly Cell-Free Vector Nodal Meshless Method via Meshless Local Petrov–Galerkin (VNMM-MLPG) for 2D Electromagnetic Eigenvalue Problems"**  
 > *Authors:* Renato C. Mesquita, Williams L. de Nicomedes, Bárbara M. F. Gonçalves, and Luilly A. G. Ortiz  
 > *Target Journal:* International Journal for Numerical Methods in Engineering (Wiley)
 
@@ -14,14 +14,14 @@ Official companion codebase and reproducibility package for the research article
 
 ## 📖 Overview
 
-The **Vector Nodal Meshless Method via Meshless Local Petrov–Galerkin (VNMM-MLPG)** is a truly cell-free spatial discretization paradigm for electromagnetic vector fields governed by Maxwell's curl-curl equations in $H(\mathbf{curl})$. By combining directional vector point interpolation with weak forms integrated over autonomous circular subdomains $\Omega_s^I$ centered at physical nodes, VNMM-MLPG completely eliminates background integration cells, intra-cell stencil switching, and geometric meshing bottlenecks.
+The **Vector Nodal Meshless Method via Meshless Local Petrov–Galerkin (VNMM-MLPG)** is a truly cell-free spatial discretization formulated for source-free two-dimensional electromagnetic eigenvalue problems governed by Maxwell's curl-curl equations in $H(\mathbf{curl})$. By combining directional vector point interpolation with weak forms integrated over autonomous circular subdomains $\Omega_s^I$ centered at physical nodes, VNMM-MLPG completely eliminates background integration cells, intra-cell stencil switching, and geometric meshing bottlenecks.
 
 ### Key Methodological Pillars:
 1. **Truly Cell-Free Integration (Autonomous Disks):** Weak-form integrals are evaluated directly over circular subdomains $\Omega_s^I$ of radius $r_s^I = \alpha_s h_I$ ($\alpha_s = 0.80$), completely decoupling spatial integration from background grids.
 2. **Local Galerkin (MLPG6) with Closed-Form Operators:** Because fixed complete linear stencils ($\mathcal{P}^1$) yield constant curl and divergence per subdomain, Stokes' and Gauss' theorems imply that weight test functions vanishing on $\partial\Omega_s^I$ (MLPG1) produce identically zero stiffness, necessitating a Local Galerkin (MLPG6) approach. All local matrices are evaluated in exact closed analytical form.
-3. **Overlapping Symmetric Subdomain Galerkin (SSG) Assembly:** Eliminates the structural asymmetry ($K_{Ij} \ne K_{Ji}$) and discrete loss of coercivity of classical row-by-row MLPG/LPIM by assembling additive local subdomain energies, guaranteeing strictly symmetric positive-semidefinite global operators ($\mathbf{K} = \mathbf{K}^T \ge 0, \mathbf{M} = \mathbf{M}^T > 0$) without requiring lens-intersection numerical cubatures.
-4. **VMS-Inspired Orthogonal Energy Stabilization:** Resolves the localized rank-2 deficiency of single-disk integration by projecting the two harmonic zero-energy modes (pure shear and hyperbolic) onto directional degrees of freedom, restoring full rank 4 and eliminating mode softening via quadratic subgrid scaling ($\alpha_{\mathrm{stab}} \propto h_{\mathrm{nom}}^2$).
-5. **Superlinear Div-Curl Regularization:** Shifts gradient nullspace modes into the high-frequency spectrum via superlinear divergence penalty scaling ($s_{\mathrm{div}} \propto h_{\mathrm{nom}}^{-1.5}$), achieving spectral purity without volumeric locking.
+3. **Overlapping Symmetric Subdomain Galerkin (SSG) Assembly:** Eliminates the structural asymmetry ($K_{Ij} \ne K_{Ji}$) and loss of stability of classical row-by-row MLPG/LPIM by assembling additive local subdomain energies, guaranteeing strictly symmetric positive-semidefinite global operators ($\mathbf{K} = \mathbf{K}^T \ge 0, \mathbf{M} = \mathbf{M}^T > 0$) without requiring lens-intersection numerical cubatures, while its continuous multiplicity-weighted Rayleigh quotient homogenizes at second order on regular rectangular lattices.
+4. **VMS-Inspired Orthogonal Energy Stabilization:** Resolves the localized rank-2 deficiency of single-disk integration by projecting the two curl- and divergence-free harmonic linear gradient modes (cross-derivative and hyperbolic quadrupole) onto directional degrees of freedom, restoring full rank 4 and mitigating mode softening via quadratic scaling ($\alpha_{\mathrm{stab}} \propto h_{\mathrm{char}}^2$).
+5. **Superlinear Div-Curl Regularization:** Shifts gradient nullspace modes outside the operational spectrum via superlinear divergence penalty scaling ($s_{\mathrm{div}} \propto h_{\mathrm{char}}^{-1.5}$), preserving physical cavity resonances without volumetric locking.
 
 ---
 
@@ -116,20 +116,20 @@ python3 run_all.py --figures
 
 | Paper Stage | Corresponding Tables | Description | Direct Command |
 | :--- | :--- | :--- | :--- |
-| **Stage 2** | Sec 3.1 Table | Galerkin patch test across 7 affine vector modes to machine precision ($\sim 10^{-14}$) | `python3 run_all.py --stage 2` |
-| **Stage 3** | Tables 2, 3, 4 | MMS spatial refinement ($L^2$ field and broken $H(\mathbf{curl})$ semi-norm) & Unsymmetric vs Symmetric comparison | `python3 run_all.py --stage 3` |
-| **Stage 4** | Table 5 | Subdomain scaling parameter sweep ($\alpha_s \in [0.707, 1.15]$) under $0\%$ and $25\%$ jitter | `python3 run_all.py --stage 4` |
-| **Stage 5** | Tables 6, 7, 8 | Cavity eigenmodes, superlinear $s_{\mathrm{div}}$ penalty scaling, and VMS orthogonal stabilization sweep | `python3 run_all.py --stage 5` |
-| **Stage 6** | Tables 9, 10 | Computational benchmark: matrix assembly speedup ($2.0\times\text{--}3.7\times$), operator sparsity ($-20\%\text{--}24\%$), and asymptotic rates | `python3 run_all.py --stage 6` |
+| **Stage 2** | Table 2 | Polynomial reproduction: Galerkin patch test across 7 affine vector modes to machine precision ($\sim 10^{-14}$) | `python3 run_all.py --stage 2` |
+| **Stage 3** | Tables 3, 4 | Auxiliary local-equilibrium MMS verification (Dirichlet & Mixed Neumann, SSG vs. unsymmetric row assembly) + Sec. 3.5.7 $M(\mathbf{x})$ study | `python3 run_all.py --stage 3` |
+| **Stage 4** | Fig. 3 | Subdomain geometry, coverage, and containment sweep ($\alpha_s \in [0.707, 1.15]$) under $0\%$ and $25\%$ jitter | `python3 run_all.py --stage 4` |
+| **Stage 5** | Tables 5–8 | Primary spectral validation: PEC cavity eigenmodes, superlinear $s_{\mathrm{div}}$ scaling, and VMS orthogonal stabilization sweep | `python3 run_all.py --stage 5` |
+| **Stage 6** | Tables 9, 10 | Computational benchmark: matrix assembly speedup ($2.0\times\text{--}3.7\times$), operator sparsity ($-20\%\text{--}24\%$), and spectral accuracy vs. VNMM-Gauss | `python3 run_all.py --stage 6` |
 
 ---
 
 ## 🔬 Core Numerical Results
 
-* **Machine-Precision Linear Consistency:** Passes all 7 affine patch tests (translations, dilatation, shear, curl, divergence, and general affine field) with errors on the order of $\sim 10^{-14}\text{--}10^{-15}$.
-* **Asymptotic Refinement Rates:** Achieves monotonic quadratic convergence $\mathcal{O}(h_{\mathrm{nom}}^{1.93})$ in $L^2(\vec{E})$ and linear convergence $\mathcal{O}(h_{\mathrm{nom}}^{1.05})$ in the broken $H(\mathbf{curl})$ semi-norm under both pure Dirichlet and mixed Dirichlet--Neumann boundary conditions.
-* **Algebraic Symmetry & Coercivity:** Eliminates the unphysical complex eigenvalues and divergence of unsymmetric row-by-row MLPG, guaranteeing $\mathbf{K} = \mathbf{K}^T \ge 0$, $\dim \ker(\mathbf{K}) = 2$ (rigid translations), and strict positive-definiteness $\mathbf{K}_{\mathrm{red}} > 0$ after PEC boundary reduction.
-* **Mode Softening Elimination:** Restores near-quadratic spectral convergence ($p = 2.15\text{--}2.39$ on regular grids and $p = 1.62$ under $25\%$ jitter) via closed-form VMS orthogonal energy stabilization ($c_{\mathrm{stab}} = 70$), driving finest-grid cavity errors down to $1.29\%$.
+* **Spectral Cavity Accuracy & Mode Softening Mitigation:** Shifts spurious gradient modes outside the tested 10-mode operational band and recovers empirical cutoff convergence rates of $p = 2.15\text{--}2.39$ on regular grids ($1.29\%$ mean error on $49\times 49$ at $c_{\mathrm{stab}} = 70$) and $p = 1.62$ under $25\%$ nodal jitter.
+* **Spatial Multiplicity Homogenization:** For smooth continuous eigenmodes, the continuous multiplicity-weighted Rayleigh quotient shift decays at rate $\mathcal{O}(h_{\mathrm{nom}}^{1.84})$ on regular rectangular lattices (down to $0.066\%$ on $49\times 49$), while retaining an $\mathcal{O}(1)$ continuous geometric shift ($\sim 1.0\%\text{--}1.3\%$) under $25\%$ jitter.
+* **Algebraic Symmetry & Fixed-Mesh Definiteness:** Avoids the complex eigenvalues and divergence of unsymmetric row-by-row MLPG, guaranteeing $\mathbf{K} = \mathbf{K}^T \ge 0$, $\dim \ker(\mathbf{K}) = 2$ (constant vector fields), and strict positive-definiteness $\mathbf{K}_{\mathrm{red}} > 0$ on fixed connected meshes after PEC boundary reduction.
+* **Auxiliary Local Verification:** Passes all 7 affine patch tests to machine precision ($\sim 10^{-14}\text{--}10^{-15}$) and achieves $\mathcal{O}(h_{\mathrm{nom}}^{1.93})$ broken $L^2$ and $\mathcal{O}(h_{\mathrm{nom}}^{1.05})$ broken $H(\mathbf{curl})$ rates under exact local weak equilibrium.
 * **Computational Speedup:** Accelerates global matrix assembly by $2.0\times\text{--}3.7\times$ over cell-based $3\times 3$ Gauss quadrature while producing $20\%\text{--}24\%$ sparser stiffness operators.
 
 ---
@@ -141,7 +141,7 @@ If you find this codebase or methodology useful in your research, please cite ou
 ```bibtex
 @article{mesquita2026vnmm_mlpg,
   author  = {Mesquita, Renato C. and de Nicomedes, Williams L. and Gon{\c{c}}alves, B{\'a}rbara M. F. and Ortiz, Luilly A. G.},
-  title   = {A Truly Cell-Free Vector Nodal Meshless Method via Meshless Local Petrov--Galerkin ({VNMM-MLPG}) for {2D} Electromagnetic Problems},
+  title   = {A Truly Cell-Free Vector Nodal Meshless Method via Meshless Local Petrov--Galerkin ({VNMM-MLPG}) for {2D} Electromagnetic Eigenvalue Problems},
   journal = {International Journal for Numerical Methods in Engineering},
   year    = {2026},
   note    = {Under Review}

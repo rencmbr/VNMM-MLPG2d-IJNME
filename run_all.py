@@ -2,7 +2,7 @@
 """
 Master Reproducibility Runner for:
 "A Truly Cell-Free Vector Nodal Meshless Method via Meshless Local Petrov-Galerkin (VNMM-MLPG)
-for 2D Electromagnetic Problems"
+for 2D Electromagnetic Eigenvalue Problems"
 International Journal for Numerical Methods in Engineering (Wiley)
 
 Usage:
@@ -83,8 +83,8 @@ STAGES = {
         "script": "mlpg_patch_test_2d.py"
     },
     "3": {
-        "name": "Stage 3: MMS Convergence",
-        "desc": "MMS refinement study (Tables 2, 3, 4): L2 field and broken H(curl) semi-norm convergence",
+        "name": "Stage 3: Auxiliary Local-Equilibrium MMS & Multiplicity M(x)",
+        "desc": "Auxiliary local-equilibrium MMS verification (SSG vs. row assembly) + Sec. 3.5.7 M(x) Rayleigh shift",
         "script": "mlpg_source_problem_2d.py"
     },
     "4": {
