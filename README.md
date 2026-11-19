@@ -48,7 +48,7 @@ VNMM-MLPG2d-IJNME/
 ├── scripts/                # Self-contained reproduction scripts mapped directly to paper
 │   ├── generate_mlpg_figures.py          # Generates all publication-quality vector figures (.pdf & .png)
 │   ├── mlpg_patch_test_2d.py             # Stage 2: Galerkin Patch Test across 7 affine vector modes
-│   ├── mlpg_source_problem_2d.py         # Stage 3: MMS Dirichlet & Mixed Neumann convergence
+│   ├── mlpg_source_problem_2d.py         # Stage 3: MMS Dirichlet & Mixed Neumann convergence + Sec. 3.5.7 M(x) Rayleigh multiplicity study
 │   ├── parametric_analysis_alpha_s_mlpg_2d.py # Stage 4: Subdomain radius factor alpha_s sensitivity
 │   ├── compute_alpha_jitter_study.py     # Stage 4: Jitter sensitivity study for alpha_s
 │   ├── mlpg_cavity_eigenvalues_2d.py     # Stage 5: Cavity eigenmodes, s_div scaling & c_stab sweep
