@@ -12,10 +12,11 @@ import time
 import json
 import numpy as np
 
-DIR_2D = os.path.abspath("2D")
-sys.path.insert(0, DIR_2D)
-sys.path.insert(0, os.path.join(DIR_2D, "src"))
-sys.path.insert(0, os.path.join(DIR_2D, "scripts"))
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+ROOT_DIR = os.path.dirname(CURRENT_DIR)
+for p in [ROOT_DIR, os.path.join(ROOT_DIR, "src"), CURRENT_DIR]:
+    if p not in sys.path:
+        sys.path.insert(0, p)
 
 from mlpg_cavity_eigenvalues_2d import solve_mlpg_cavity_eigenvalues
 
@@ -81,7 +82,8 @@ for jit in jitters:
         results['rates'][j_key][a_key] = float(slope)
         print(f"--> Convergence rate alpha_s={a:.2f} [{j_key}]: p = {slope:.2f}")
 
-with open("2D/scripts/alpha_jitter_study_results.json", "w") as f:
+out_path = os.path.join(CURRENT_DIR, "alpha_jitter_study_results.json")
+with open(out_path, "w") as f:
     json.dump(results, f, indent=2)
 
-print("\nResults successfully saved to 2D/scripts/alpha_jitter_study_results.json")
+print(f"\nResults successfully saved to {out_path}")

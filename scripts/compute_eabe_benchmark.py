@@ -8,10 +8,11 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-DIR_2D = os.path.abspath("2D")
-sys.path.insert(0, DIR_2D)
-sys.path.insert(0, os.path.join(DIR_2D, "src"))
-sys.path.insert(0, os.path.join(DIR_2D, "scripts"))
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+ROOT_DIR = os.path.dirname(CURRENT_DIR)
+for p in [ROOT_DIR, os.path.join(ROOT_DIR, "src"), CURRENT_DIR]:
+    if p not in sys.path:
+        sys.path.insert(0, p)
 
 from cavity_mesh_2d import generate_cavity_mesh
 from mlpg_subdomains import build_mlpg_subdomains_2d
@@ -110,6 +111,7 @@ for N in grids:
     })
 
 # Save benchmark json
-with open("2D/scripts/benchmark_eabe_6meshes.json", "w") as f:
+out_path = os.path.join(CURRENT_DIR, "benchmark_eabe_6meshes.json")
+with open(out_path, "w") as f:
     json.dump({'results': bench_results}, f, indent=2)
-print("Saved benchmark_eabe_6meshes.json successfully!")
+print(f"Saved {out_path} successfully!")

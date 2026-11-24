@@ -14,10 +14,11 @@ import json
 import numpy as np
 import scipy.linalg as la
 
-DIR_2D = os.path.abspath("2D")
-sys.path.insert(0, DIR_2D)
-sys.path.insert(0, os.path.join(DIR_2D, "src"))
-sys.path.insert(0, os.path.join(DIR_2D, "scripts"))
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+ROOT_DIR = os.path.dirname(CURRENT_DIR)
+for p in [ROOT_DIR, os.path.join(ROOT_DIR, "src"), CURRENT_DIR]:
+    if p not in sys.path:
+        sys.path.insert(0, p)
 
 from cavity_mesh_2d import generate_cavity_mesh
 from mlpg_subdomains import build_mlpg_subdomains_2d
@@ -122,7 +123,8 @@ for method in ['gauss', 'mlpg']:
 
 results['rates'] = rates
 
-with open("2D/scripts/jitter_benchmark_results.json", "w") as f:
+out_path = os.path.join(CURRENT_DIR, "jitter_benchmark_results.json")
+with open(out_path, "w") as f:
     json.dump(results, f, indent=2)
 
-print("\nResults successfully saved to 2D/scripts/jitter_benchmark_results.json")
+print(f"\nResults successfully saved to {out_path}")
