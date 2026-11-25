@@ -11,7 +11,7 @@ Figures produced (matching manuscript numbering Figs. 1--7):
 1. fig_mlpg_subdomains_schematic.pdf/.png (Figure 1: Schematic of MLPG Subdomains)
 2. fig_mlpg_mms_convergence.pdf/.png      (Figure 2: MMS Asymptotic Spatial Convergence)
 3. fig_mlpg_alpha_s_sensitivity.pdf/.png  (Figure 3: Parametric Sensitivity of Subdomain Radius)
-4. fig_mlpg_modal_fields.pdf/.png         (Figure 4: Exact vs Global VNMM-MLPG Modal Fields, 21x21 & 49x49)
+4. fig_mlpg_modal_fields.pdf/.png         (Figure 4: Exact vs Global VNMM-MLPG Modal Fields, 21x21 & 81x81)
 5. fig_mlpg_cavity_jitter.pdf/.png        (Figure 5: Unstabilized Cavity Cutoff Error under Jitter)
 6. fig_mlpg_cavity_stabilization.pdf/.png (Figure 6: Orthogonal Energy Stabilization Convergence, 15..81)
 7. fig_mlpg_benchmark_comparison.pdf/.png (Figure 7: Computational Benchmark VNMM-MLPG vs Gauss)
@@ -301,7 +301,7 @@ def plot_fig3_alpha_s_sensitivity():
 
 
 def plot_fig4_modal_fields():
-    print("Generating Figure 4: Exact vs Global VNMM-MLPG Modal Fields (21x21 and 49x49 Regular Grids)...")
+    print("Generating Figure 4: Exact vs Global VNMM-MLPG Modal Fields (21x21 and 81x81 Regular Grids)...")
     from scipy.sparse.linalg import eigsh
     from src.mlpg_assembler_2d import assemble_mlpg_matrices_2d, get_disk_quadrature_points_2d
     from src.eigen_solver_cavity_2d import apply_pec_boundary_conditions
@@ -425,9 +425,9 @@ def plot_fig4_modal_fields():
         return ex_plots, num_plots
 
     ex_21, num_21 = solve_regular_grid_modes(N=21, s_div=15.0, alpha_stab=0.0)
-    s_div_49 = 15.0 * ((1.0 / 20.0) / (1.0 / 48.0)) ** 1.5
-    alpha_49 = 4.0 / 48.0
-    _, num_49 = solve_regular_grid_modes(N=49, s_div=s_div_49, alpha_stab=alpha_49)
+    s_div_81 = 15.0 * ((1.0 / 20.0) / (1.0 / 80.0)) ** 1.5
+    alpha_81 = 4.0 / 80.0
+    _, num_81 = solve_regular_grid_modes(N=81, s_div=s_div_81, alpha_stab=alpha_81)
 
     fig, axes = plt.subplots(3, 3, figsize=(11.0, 9.4), dpi=300, sharex=True, sharey=True)
     levels = np.linspace(0.0, 1.0, 21)
@@ -436,7 +436,7 @@ def plot_fig4_modal_fields():
     row_specs = [
         (ex_21, "Exact Analytical\n" + r"$y$ [m]"),
         (num_21, r"VNMM-MLPG ($21\times 21$)" + "\n" + r"$y$ [m]"),
-        (num_49, r"VNMM-MLPG ($49\times 49$)" + "\n" + r"$y$ [m]"),
+        (num_81, r"VNMM-MLPG ($81\times 81$)" + "\n" + r"$y$ [m]"),
     ]
 
     for r_idx, (field_dict, r_lbl) in enumerate(row_specs):

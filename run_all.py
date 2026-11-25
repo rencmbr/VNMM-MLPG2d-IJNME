@@ -52,7 +52,7 @@ FIGURES = {
     },
     "4": {
         "name": "Figure 4",
-        "desc": "Visual comparison of analytical vs global VNMM-MLPG modal fields (TE10, TE11, TE21) on 21x21 & 49x49",
+                "desc": "Visual comparison of analytical vs global VNMM-MLPG modal fields (TE10, TE11, TE21) on 21x21 & 81x81",
         "script": "generate_mlpg_figures.py",
         "output": "figures/fig_mlpg_modal_fields.pdf"
     },
