@@ -4,8 +4,8 @@ generate_mlpg_figures.py
 ========================
 Generates publication-quality vector (.pdf) and raster (.png) figures for the
 IJNME article:
-"A Truly Cell-Free Vector Nodal Meshless Method via Meshless Local Petrov--Galerkin (VNMM-MLPG)
-for 2D Electromagnetic Eigenvalue Problems"
+"A Truly Cell-Free Vector Nodal Meshless Method via Meshless Local Petrov-Galerkin
+for Two-Dimensional Electromagnetic Eigenvalue Problems"
 
 Figures produced (matching manuscript numbering Figs. 1--7):
 1. fig_mlpg_subdomains_schematic.pdf/.png (Figure 1: Schematic of MLPG Subdomains)

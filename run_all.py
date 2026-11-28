@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
 Master Reproducibility Runner for:
-"A Truly Cell-Free Vector Nodal Meshless Method via Meshless Local Petrov--Galerkin (VNMM-MLPG)
-for 2D Electromagnetic Eigenvalue Problems"
+"A Truly Cell-Free Vector Nodal Meshless Method via Meshless Local Petrov-Galerkin
+for Two-Dimensional Electromagnetic Eigenvalue Problems"
 International Journal for Numerical Methods in Engineering (Wiley)
 
 Usage:

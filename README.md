@@ -1,4 +1,4 @@
-# Truly Cell-Free Vector Nodal Meshless Method (VNMM-MLPG 2D) for Electromagnetic Eigenvalue Problems
+# A Truly Cell-Free Vector Nodal Meshless Method via Meshless Local Petrov–Galerkin for Two-Dimensional Electromagnetic Eigenvalue Problems
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
@@ -6,7 +6,7 @@
 
 Official companion codebase and reproducibility package for the research article:
 
-> **"A Truly Cell-Free Vector Nodal Meshless Method via Meshless Local Petrov--Galerkin (VNMM-MLPG) for 2D Electromagnetic Eigenvalue Problems"**  
+> **"A Truly Cell-Free Vector Nodal Meshless Method via Meshless Local Petrov–Galerkin for Two-Dimensional Electromagnetic Eigenvalue Problems"**  
 > *Authors:* Renato C. Mesquita, Williams L. de Nicomedes, Bárbara M. F. Gonçalves, and Luilly A. G. Ortiz  
 > *Target Journal:* International Journal for Numerical Methods in Engineering (Wiley)
 
@@ -153,7 +153,7 @@ If you find this codebase or methodology useful in your research, please cite ou
 ```bibtex
 @article{mesquita2026vnmm_mlpg,
   author  = {Mesquita, Renato C. and de Nicomedes, Williams L. and Gon{\c{c}}alves, B{\'a}rbara M. F. and Ortiz, Luilly A. G.},
-  title   = {A Truly Cell-Free Vector Nodal Meshless Method via Meshless Local Petrov--Galerkin ({VNMM-MLPG}) for {2D} Electromagnetic Eigenvalue Problems},
+  title   = {A Truly Cell-Free Vector Nodal Meshless Method via Meshless Local Petrov--Galerkin for Two-Dimensional Electromagnetic Eigenvalue Problems},
   journal = {International Journal for Numerical Methods in Engineering},
   year    = {2026},
   note    = {Under Review}
